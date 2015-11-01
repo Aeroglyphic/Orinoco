@@ -1,0 +1,24 @@
+{
+    "name": "rawswift/Orinoco",
+    "description": "A lightweight PHP framework.",
+    "license": "MIT",
+    "keywords": ["orinoco", "framework", "php", "lightweight", "microframework"],
+    "authors": [
+        {
+            "name": "Ryan Yonzon",
+            "email": "ryanyonzon@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+        },
+    "require-dev": {
+        "php": ">=5.4.0",
+        "phpunit/phpunit": "4.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Orinoco\\": "./src"
+        }
+    }
+}
