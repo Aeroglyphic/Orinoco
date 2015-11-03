@@ -15,7 +15,7 @@ use Closure;
 
 use Orinoco\Controller;
 use Orinoco\Configuration;
-use Orinoco\AutoLoad;
+use Orinoco\Autoload;
 use Orinoco\Container;
 
 use Orinoco\Http;
@@ -68,7 +68,7 @@ class Application extends Controller
     {
         $this->config = $config;
         $this->container = new Container();
-        $this->autoload = new AutoLoad();
+        $this->autoload = new Autoload();
 
         // Register framework's classes (for dependency injection)
         $this->http = $this->container->register(new Http($_SERVER));

@@ -11,7 +11,7 @@ namespace Orinoco;
 /**
  * Framework's internal autoload mechanism.
  */
-class AutoLoad
+class Autoload
 {
     /**
      * Register an anonymous (autoload) function.
