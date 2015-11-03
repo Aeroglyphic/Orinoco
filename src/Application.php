@@ -68,7 +68,7 @@ class Application extends Controller
     {
         $this->config = $config;
         $this->container = new Container();
-        $this->autoload = new AutoLoad($this);
+        $this->autoload = new AutoLoad();
 
         // Register framework's classes (for dependency injection)
         $this->http = $this->container->register(new Http($_SERVER));
@@ -92,7 +92,10 @@ class Application extends Controller
             foreach ($this->config->application['autoload'] as $path) {
                 $relativePath = $this->config->application['base'] . DIRECTORY_SEPARATOR . ltrim(rtrim($path, '/'), '/');
                 $absolutePath = realpath($relativePath);
-                $this->autoload->register($absolutePath);
+                // Register only if path exists
+                if (file_exists($absolutePath)) {
+                    $this->autoload->register($absolutePath);
+                }
             }
         }
 
