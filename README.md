@@ -4,6 +4,8 @@
 
 A lightweight PHP framework.
 
+This source is the package implementation of [orinoco-framework-php](https://github.com/rawswift/orinoco-framework-php) (with some added features).
+
 ## Installation
 
 Create your project's directory:
