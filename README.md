@@ -58,6 +58,8 @@ Here's an example of a basic configuration:
 
     <?php
 
+    require '../../vendor/autoload.php'; // Composer's Autoload script
+
     $config = new Orinoco\Configuration(
                             array(
                                 'application' => array(
