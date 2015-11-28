@@ -26,11 +26,11 @@ Install `Composer` by running this command from your terminal:
 
 Now, install the framework using the command below:
 
-    ./composer.phar install
+    php composer.phar install
 
 Congratulations! Orinoco framework package should now be installed in your project's directory.
 
-## Application
+## Hello, World
 
 A simple `hello, world` application.
 
@@ -51,6 +51,119 @@ Set your home page route handler:
 Run the application:
 
     $app->run();
+
+## Configuration
+
+Here's an example of a basic configuration:
+
+    <?php
+
+    $config = new Orinoco\Configuration(
+                            array(
+                                'application' => array(
+                                        'production' => false,
+                                        'base' => '../../myapp', // Path to your controllers, views and custom class directory
+                                        'autoload' => array(
+                                                '/controller',
+                                                '/class'
+                                            )
+                                    ),
+                                'view' => array(
+                                        'base' => '../view' // Path to your view template
+                                    ),
+                                'route' => array(
+                                        '/foo/:id' => array(
+                                                'controller' => 'foo',
+                                                'action' => 'index',
+                                                'segment' => array(
+                                                        'id' => '(\d+)' // "id" as digits only
+                                                    )
+                                            ),
+                                        '/foo/bar/:type/:id' => array(
+                                                'controller' => 'foo',
+                                                'action' => 'bar',
+                                                'segment' => array(
+                                                        'type' => '(\w+)', // "type" as letters and digits only
+                                                        'id' => '(\d+)' // "id" as digits only
+                                                    )
+                                            )
+                                    )
+                            ));
+
+    $app = new Orinoco\Application($config);
+    $app->run();
+
+## Controller
+
+You can create Controller classes to organize request handling logic. Below is an example of a basic Controller class:
+
+    <?php
+
+    class fooController
+    {
+            public function __construct()
+            {
+                    // This method will be executed upon (this) class instantiation
+                    // For example, you can use this method to initialize a private/public variable
+            }
+
+            public function index()
+            {
+                    // Executed on request URI /foo
+            }
+
+            public function bar()
+            {
+                    // Executed on request URI /foo/bar
+            }
+    }
+
+Though the above Controller class will work just fine but in real world, you need to add logic to your Controller and Action methods. So here is an example of a simple `log` Controller with basic logic:
+
+    <?php
+
+    // Use framework's built-in View class
+    use Orinoco\View;
+
+    // Use Monolog (vendor class, installed via Composer)
+    use Monolog\Logger;
+    use Monolog\Handler\StreamHandler;
+
+    class logController
+    {
+            // View object instance will be injected automatically
+            // So you don't need to instantiate a new View object
+            public function index(View $view)
+            {
+                    // Create a log channel
+                    $log = new Logger('name');
+                    $log->pushHandler(new StreamHandler('/tmp/monolog.txt', Logger::WARNING));
+
+                    // Add records to the log channel
+                    $log->addWarning('Foo');
+                    $log->addError('Bar');
+
+                    // Assuming everything went OK, output a JSON response
+                    $view->renderJSON(array(
+                        'ok' => true,
+                        'message' => 'Log written successfully.'
+                    ));
+            }
+    }
+
+## View
+
+The framework includes a simple View class to handle basic template system. Below is the template system's default directory structure:
+
+    +--/view
+        |
+        +--/layout
+        |
+        +--/page
+        |
+        +--/partial
+
+Please note that you can also use other template engine library, such as Smarty, Twig, Plates, etc.
 
 ## License
 
