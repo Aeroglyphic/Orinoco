@@ -153,7 +153,7 @@ Though the above Controller class will work just fine but in real world, you nee
 
 ## View
 
-The framework includes a simple View class to handle basic template system. Below is the template system's default directory structure:
+The framework comes with a simple View class to handle basic template system. Below is the template system's default directory structure:
 
     +--/view
         |
@@ -163,7 +163,45 @@ The framework includes a simple View class to handle basic template system. Belo
         |
         +--/partial
 
+Of course you can also customize your template directories. You can do this by configuring your View settings. For example:
+
+    ...
+    ...
+    'view' => array(
+        'base' => '../myView', // Root directory of your templates
+        'template' => array(
+                'layout' => '/myLayouts',
+                'page' => '/myPages',
+                'partial' => '/somePartialTemplates'
+            )
+    ),
+    ...
+    ...
+
 Please note that you can also use other template engine library, such as Smarty, Twig, Plates, etc.
+
+Here's an example of a Layout template: (e.g. `/myapp/view/layout/main.php`)
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Written using Orinoco Framework">
+        <meta name="author" content="John Doe">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <title>My Application</title>
+    </head>
+    <body>
+    <div><?= $this->renderContent() ?></div>
+    </body>
+    </html>
+
+And a typical Page template: (e.g. `/myapp/view/page/hello/index.php`)
+
+    <h1>Hello, <?= ucfirst($this->name) ?>!</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum elit...</p>
 
 ## License
 
