@@ -18,10 +18,10 @@ class Controller
      *
      * @param mixed $mixed String or an array
      * @param boolean $useRefresh Use 'refresh' instead of 'location'
-     * @param integer $refreshRime Time to refresh
+     * @param integer $refreshTime Time to refresh
      *
      */
-    public function redirect($mixed, $useRefresh = false, $refreshRime = 3)
+    public function redirect($mixed, $useRefresh = false, $refreshTime = 3)
     {
         $url = null;
         if (is_string($mixed)) {
