@@ -134,6 +134,14 @@ class Application extends Controller
     }
 
     /**
+     * Interface for Orinoco\Autoload.
+     */
+    public function Autoload()
+    {
+        return $this->autoload;
+    }
+
+    /**
      * Interface for Orinoco\Container (DI).
      */
     public function Container()
