@@ -205,6 +205,43 @@ And a typical Page template: (e.g. `/myapp/view/page/hello/index.php`)
     <h1>Hello, <?= ucfirst($this->name) ?>!</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum elit...</p>
 
+## Console Runner
+
+You can run an application as a console command, for example:
+
+    <?php
+
+    require 'path/to/vendor/autoload.php'; // Composer's Autoload script
+
+    $config = new Orinoco\Configuration(
+                            array(
+                                'application' => array(
+                                        'base' => '../../myapp', // Path to your commands, custom class, etc
+                                        'autoload' => array(
+                                                '/command', // Command classes
+                                            )
+                                    )
+                            ));
+
+    $console = new Orinoco\Console($config);
+
+    $response = $console->run('/foobar');
+
+    echo $response;
+
+The above code will instantiate the class `myapp/command/foobarCommand.php` and run the `index` method:
+
+    <?php
+
+    class foobarCommand
+    {
+        public function index()
+        {
+            return "hello, world\n";
+        }
+    }
+
+
 ## License
 
 Licensed under the [MIT license](http://www.opensource.org/licenses/mit-license.php)
