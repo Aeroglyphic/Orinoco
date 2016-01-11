@@ -19,6 +19,7 @@ class Configuration
     const PHP_FILE_EXTENSION = '.php';
     const SELF_CONTROLLER = '__SELF__';
     const SELF_ACTION = '__SELF__';
+    const COMMAND_NAME_SUFFIX = 'Command';
     const CONTROLLER_NAME_SUFFIX = 'Controller';
     const DEFAULT_CONTROLLER = 'index';
     const DEFAULT_ACTION = 'index';

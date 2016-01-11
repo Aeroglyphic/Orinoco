@@ -64,6 +64,11 @@ class Route
     public $segments = array();
 
     /**
+     * @var object (Orinoco\Http or Orinoco\Command)
+     */
+    private $request;
+
+    /**
      * @var object (Orinoco\Container object)
      */
     private $container;
@@ -81,14 +86,13 @@ class Route
     /**
      * Constructor.
      *
-     * @param object $http Orinoco\Http
+     * @param object $request Orinoco\Http or Orinoco\Command
      * @param object $container Orinoco\Container
      *
      */
-    public function __construct(Http $http, Container $container)
+    public function __construct($request, Container $container)
     {
-        $this->requestMethod = $http->getRequestMethod();
-        $this->requestUri = $http->getRequestURI();
+        $this->request = $request;
         $this->container = $container;
     }
 
@@ -188,6 +192,8 @@ class Route
      */
     public function parseRequest()
     {
+        $this->requestUri = $this->request->getRequestURI();
+
         $this->components = parse_url($this->requestUri);
         $this->requestMap = preg_split("/\//", $this->components['path'], 0, PREG_SPLIT_NO_EMPTY);
         if ($match = $this->matchRouteRule($this->components['path'])) {
@@ -262,6 +268,8 @@ class Route
      */
     private function matchRouteRule($subject)
     {
+        $this->requestMethod = $this->request->getRequestMethod();
+
         foreach($this->routeTable as $k => $v) {
 
             // Check if 'method' is defined in the route rule

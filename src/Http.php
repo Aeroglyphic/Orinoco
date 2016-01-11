@@ -8,10 +8,12 @@
 
 namespace Orinoco;
 
+use Orinoco\Interfaces\Request;
+
 /**
  * Framework HTTP class.
  */
-class Http
+class Http implements Request
 {
     /**
      * @var array ($_SERVER information storage)
