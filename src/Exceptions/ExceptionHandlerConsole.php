@@ -6,7 +6,7 @@
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
  */
 
-namespace Orinoco;
+namespace Orinoco\Exceptions;
 
 use Exception;
 use ErrorException;

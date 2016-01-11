@@ -21,7 +21,7 @@ use Orinoco\Container;
 use Orinoco\Http;
 use Orinoco\Route;
 use Orinoco\View;
-use Orinoco\ExceptionHandler;
+use Orinoco\Exceptions\ExceptionHandler;
 
 /**
  * The framework.

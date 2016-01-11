@@ -20,7 +20,7 @@ use Orinoco\Container;
 
 use Orinoco\Command;
 use Orinoco\Route;
-use Orinoco\ExceptionHandlerConsole;
+use Orinoco\Exceptions\ExceptionHandlerConsole;
 
 /**
  * Console command runner.
