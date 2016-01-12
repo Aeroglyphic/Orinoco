@@ -17,6 +17,7 @@ use Orinoco\Controller;
 use Orinoco\Configuration;
 use Orinoco\Autoload;
 use Orinoco\Container;
+use Orinoco\Param;
 
 use Orinoco\Command;
 use Orinoco\Route;
@@ -36,6 +37,11 @@ class Console
      * @var Orinoco\Container
      */
     protected $container;
+
+    /**
+     * @var Orinoco\Param
+     */
+    protected $param;
 
     /**
      * @var Orinoco\Command
@@ -62,6 +68,7 @@ class Console
     {
         $this->config = $config;
         $this->container = new Container();
+        $this->param = new Param();
         $this->autoload = new Autoload();
 
         // Register framework's classes (for dependency injection)
@@ -73,11 +80,17 @@ class Console
     /**
      * Runner.
      */
-    public function run($request = null)
+    public function run($request = null, $param = array())
     {
 
         if (isset($request)) {
             $this->command->setRequest($request);
+        }
+
+        if (count($param) > 0) {
+            foreach ($param as $pk => $pv) {
+                $this->param->$pk = $pv;
+            }
         }
 
         // Internal Autoload mechanism
@@ -127,6 +140,14 @@ class Console
     public function Container()
     {
         return $this->container;
+    }
+
+    /**
+     * Interface for Orinoco\Param.
+     */
+    public function Param()
+    {
+        return $this->param;
     }
 
     /**
