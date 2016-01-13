@@ -28,7 +28,7 @@ class Configuration
     /**
      * @var array (Default route rule)
      */
-    private $default_routes = array(
+    private $defaultRoutes = array(
                 '(^\/+[a-zA-Z]+\/+[a-zA-Z]([^/]+)/?$)' => array(
                         'controller' => self::SELF_CONTROLLER,
                         'action' => self::SELF_ACTION
@@ -66,7 +66,7 @@ class Configuration
         }
 
         // Append default route rules
-        foreach ($this->default_routes as $route => $attr) {
+        foreach ($this->defaultRoutes as $route => $attr) {
             $this->config['route'][$route] = $attr;
         }
     }
