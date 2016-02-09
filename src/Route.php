@@ -131,6 +131,9 @@ class Route
             if (isset($handler['action'])) {
                 $handle['action'] = $handler['action'];
             }
+            if (isset($handler['segment'])) {
+                $handle['segment'] = $handler['segment'];
+            }
         // Else, string
         } else if (is_string($handler)) {
             $exploded = explode('.', $handler);
